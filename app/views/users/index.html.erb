@@ -1,0 +1,9 @@
+<h1 style="color:Blue;">All users</h1>
+
+<ul style="background-color:Black;">
+    
+    <% @user.each do |user| %>
+        <li style="color:White;"><%= user.email %></li>
+    <% end %>
+    
+</ul>

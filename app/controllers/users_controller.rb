@@ -19,8 +19,9 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             login!(@user)
-            redirect_to users_url
+            redirect_to user_url(@user)
         else
+            flash.now[:errors] = ["invalid user credentials."]
             render :new
         end
     end

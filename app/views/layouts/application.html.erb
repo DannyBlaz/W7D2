@@ -14,8 +14,9 @@
 
     <% if logged_in? %>
         <form action="<%= session_url %>" method="post">
-        <input type="hidden" name="method" value="delete">
-        <input type="submit" value="Log_out" >
+            <%= auth_token %>
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Log_out" >
         </form>
     <% else %>
         <form action="<%= new_session_url %>">
@@ -25,6 +26,22 @@
         <form action="<%= new_user_url %>">
         <input type="submit" value="Sign_up" >
         </form>
+    <% end %>
+
+    <% if flash[:errors] %>
+        <ul>
+            <% flash[:errors].each do |error| %>
+                <li><%= error %></li>
+            <% end %>
+        </ul>
+    <% end %>
+    
+    <% if flash[:success] %> <!-- for both flash && flash.now -->
+        <ul>
+            <% flash[:success].each do |msg| %> <!-- ordinary ruby obj/arr -->
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
     <% end %>
 
     <%= yield %>
